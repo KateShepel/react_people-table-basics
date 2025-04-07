@@ -1,15 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Person } from '../../types/Person';
 import cn from 'classnames';
-import { PeopleContext } from '../../contexts/PeopleContext';
 import { useParams } from 'react-router-dom';
 
 type Props = {
   person: Person;
+  people: Person[]
 };
 
-export const PersonLink: React.FC<Props> = ({ person }) => {
-  const { people } = useContext(PeopleContext);
+export const PersonLink: React.FC<Props> = ({ person, people }) => {
   const { slug } = useParams();
 
   const mother = people?.find(human => human.name === person.motherName);

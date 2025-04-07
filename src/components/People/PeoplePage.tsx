@@ -1,10 +1,18 @@
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
-import { PeopleContext } from '../../contexts/PeopleContext';
 import { PeopleTable } from './PeopleTable';
+import { Person } from '../../types';
+import { getPeople } from '../../api';
 
 export const PeoplePage = () => {
-  const { people, errorMessage } = useContext(PeopleContext);
+  const [people, setPeople] = useState<Person[] | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    getPeople()
+      .then(setPeople)
+      .catch(() => setErrorMessage('Something went wrong'));
+  }, []);
 
   return (
     <>
@@ -24,7 +32,7 @@ export const PeoplePage = () => {
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {people && people.length > 0 && <PeopleTable />}
+          {people && people.length > 0 && <PeopleTable people={people} />}
         </div>
       </div>
     </>

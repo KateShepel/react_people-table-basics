@@ -1,10 +1,12 @@
-import { useContext } from 'react';
-import { PeopleContext } from '../../contexts/PeopleContext';
+import React from 'react';
 import { PersonLink } from './PersoneLink';
+import { Person } from '../../types';
 
-export const PeopleTable = () => {
-  const { people } = useContext(PeopleContext);
+type Props = {
+  people: Person[];
+}
 
+export const PeopleTable: React.FC<Props> = ({ people }) => {
   return (
     <table
       data-cy="peopleTable"
@@ -21,7 +23,11 @@ export const PeopleTable = () => {
         </tr>
       </thead>
 
-      <tbody>{people?.map(person => <PersonLink key={person.slug} person={person} />)}</tbody>
+      <tbody>
+        {people?.map(person => (
+          <PersonLink key={person.slug} person={person} people={people} />
+        ))}
+      </tbody>
     </table>
   );
 };
