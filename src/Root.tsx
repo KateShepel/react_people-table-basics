@@ -9,7 +9,7 @@ import { App } from './App';
 import { PeopleProvider } from './contexts/PeopleContext';
 import { PageNotFound } from './components/PageNotFound/PageNotFound';
 import { HomePage } from './components/HomePage/HomePage';
-import { PeoplePage } from './components/PeoplePage/PeoplePage';
+import { PeoplePage } from './components/People/PeoplePage';
 
 export const Root = () => (
   <Router>
